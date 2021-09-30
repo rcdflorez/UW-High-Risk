@@ -39,7 +39,25 @@ var slideCount = $("#slider ul li").length;
 var slideWidth = $("#step-nav").width() + 32; //$("#slider ul li").width();
 var slideHeight = $("div.step-3").innerHeight();
 var sliderUlWidth = slideCount * slideWidth;
-var ulInitialHeight = $("#slider ul li:first-child").height();
+var ulInitialHeight = 540; //$("#slider ul li:first-child").height();
+
+var navContainerWidth =
+  $("#nav-steps-container").outerWidth() -
+  parseInt($("#slider").css("padding-left")) / 2;
+
+console.log(navContainerWidth);
+
+var marginLeftCalculation = 0;
+var desktopMarginCalulation =
+  $("#testDiv").innerWidth() +
+  parseInt($("#testDiv").css("padding-left")) * 3 +
+  4;
+
+if (window.screen.width > 800) {
+  marginLeftCalculation = desktopMarginCalulation;
+} else {
+  marginLeftCalculation = navContainerWidth;
+}
 
 var currentStep = 0;
 
@@ -53,7 +71,7 @@ $("#slider").css({ width: navWidth });
 
 $("#slider ul").css({
   width: sliderUlWidth,
-  marginLeft: -slideWidth + slideWidth * -0.17,
+  marginLeft: -marginLeftCalculation,
   height: ulInitialHeight,
 });
 
