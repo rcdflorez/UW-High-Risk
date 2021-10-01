@@ -35,7 +35,7 @@ var slideCount = $("#slider ul li").length;
 var slideWidth = $("#step-nav").width() + 32; //$("#slider ul li").width();
 var slideHeight = $("div.step-3").innerHeight();
 var sliderUlWidth = slideCount * slideWidth;
-var ulInitialHeight = 540; //$("#slider ul li:first-child").height();
+var ulInitialHeight = 600; //$("#slider ul li:first-child").height();
 
 var navContainerWidth =
   $("#nav-steps-container").outerWidth() -
