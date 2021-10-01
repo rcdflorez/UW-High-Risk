@@ -26,12 +26,17 @@ function BerbixHandOffToPhone() {
 }
 
 function BerbixVerificationCompleted() {
+  $("section.berbix div.content div.step-1 h1.heading-title").html(
+    "Thanks for completing the ID check"
+  );
   $("section.berbix div.content div.step-1 p").html(
-    "Verification completed, thanks."
+    "Now proceed with bank verification."
   );
   $("section.berbix div.content div.step-1 form").html(
     "<svg class='checkmark' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'><circle class='checkmark__circle' cx='26' cy='26' r='25' fill='none'/><path class='checkmark__check' fill='none' d='M14.1 27.2l7.1 7.2 16.7-16.8'/></svg>"
   );
+  $("div.options-note").addClass("invisible");
+  $("div.step-1 img").addClass("invisible");
   $("section.berbix div.content div.step-1 a.btn").removeClass("disabled");
 }
 
@@ -140,4 +145,44 @@ $("div.step-1 a.start-verification").click(function (e) {
   setTimeout(function () {
     BerbixVerificationCompleted();
   }, 3500);
+});
+
+$("a.uploadLink").click(function (e) {
+  console.log("Holi");
+  e.preventDefault();
+  $("div.step-2")
+    .load("upload-test.html", function () {})
+    .hide()
+    .fadeIn();
+});
+
+var handler = BerbixVerify.configure({
+  onComplete: function () {
+    alert("Verification Complete.");
+  },
+  onExit: function () {
+    alert("Verification exited.");
+  },
+});
+
+var hosted = false;
+var testName = "Ricardo's test";
+var loanId = "10000";
+var verificationDomain = "https://vportaltest.explorecredit.com";
+
+$.ajax(`${verificationDomain}/berbix/createClientToken`, {
+  method: "POST",
+  data: {
+    hosted,
+    test_name: testName,
+    loan_id: loanId,
+  },
+}).done((data) => {
+  clientToken = data.client_token;
+
+  handler.open({
+    clientToken: clientToken,
+    modal: false,
+    root: "berbixArea",
+  });
 });

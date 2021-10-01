@@ -430,10 +430,11 @@ a.btn {
 }
 
 section.berbix {
+  h1.heading-title {
+    font-weight: 300;
+  }
+
   div.step-1 {
-    h1 {
-      font-weight: 200;
-    }
     label p {
       font-size: 0.85rem;
       font-weight: 200;
