@@ -4,7 +4,7 @@ function BerbixHandOffToPhone() {
     moveRight();
   });
   $("section.berbix div.content div.step-1 p").html(
-    "Please complete the verification to continue"
+    "Please, complete the verification to continue."
   );
   $("section.berbix div.content div.step-1 form").html(
     "<div class='spinner'><div class='cube1'></div><div class='cube2'></div></div>"
@@ -150,6 +150,7 @@ $("a.uploadLink").click(function (e) {
 var handler = BerbixVerify.configure({
   onComplete: function () {
     alert("Verification Complete.");
+    startLendMateFlow();
   },
   onExit: function () {
     alert("Verification exited.");
@@ -158,11 +159,12 @@ var handler = BerbixVerify.configure({
 
 var hosted = false;
 var testName = "Ricardo's test";
-var loanId = "10000";
-var verificationDomain = "https://vportaltest.explorecredit.com";
+var loanId = parseInt(Math.random() * 100000);
+var verificationDomain = "https://d37e-99-158-137-142.ngrok.io"; //"https://vportaltest.explorecredit.com";
 
-$.ajax(`${verificationDomain}/berbix/createClientToken`, {
+$.ajax(`${verificationDomain}/api/uw_flow/berbix/createClientToken`, {
   method: "POST",
+  crossDomain: true,
   data: {
     hosted,
     test_name: testName,
@@ -177,3 +179,24 @@ $.ajax(`${verificationDomain}/berbix/createClientToken`, {
     root: "berbixArea",
   });
 });
+
+function startLendMateFlow() {
+  $.ajax(`${verificationDomain}/api/uw_flow/lendmate/createClientToken`, {
+    method: "POST",
+    crossDomain: true,
+    data: {
+      loan_id: loanId,
+    },
+  }).done((data) => {
+    data.widget_link;
+
+    let lmFrame = $("#lendMateContainer");
+    let iframeSource = data.widget_link;
+    lmFrame.attr("src", iframeSource);
+
+    window.onmessage = (event) => {
+      console.log(`Received message: ${event.data}`);
+      console.log(event);
+    };
+  });
+}
