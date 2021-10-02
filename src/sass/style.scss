@@ -585,5 +585,36 @@ div.slider {
 
 iframe#lendMateContainer {
   width: 100%;
-  min-height: 800px;
+  min-height: 50vh;
+}
+
+div#card-element {
+  input {
+    border: solid green 3px;
+  }
+}
+
+div.step-3 {
+  .StripeElement--focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  /* Can't see what I type without this */
+  #card-number.form-control,
+  #card-cvc.form-control,
+  #card-exp.form-control {
+    display: inline-block;
+  }
+  .completed-process-title {
+    font-size: 4rem;
+  }
+  .completed-process-description {
+    color: gray;
+    font-weight: lighter;
+  }
+  .text-disclaimer {
+    font-size: 0.85rem;
+  }
 }
