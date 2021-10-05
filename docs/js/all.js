@@ -191,29 +191,23 @@ const slideWidth = $("#step-nav").width() + 32; //$("#slider ul li").width();
 const slideHeight = $("div.step-3").innerHeight();
 const sliderUlWidth = slideCount * slideWidth;
 const ulInitialHeight = 615; // $("#slider ul li:first-child").height();
-
-var navContainerWidth =
+const navWidth = $("#step-nav").width() + 32;
+const navContainerWidth =
   $("#nav-steps-container").outerWidth() -
   parseInt($("#slider").css("padding-left")) / 2;
-
-console.log(navContainerWidth);
-
-var marginLeftCalculation = 0;
-var desktopMarginCalulation =
+const desktopMarginCalulation =
   $("#testDiv").innerWidth() +
   parseInt($("#testDiv").css("padding-left")) * 3 +
   4;
+
+let currentStep = 0;
+let marginLeftCalculation = 0;
 
 if (window.screen.width > 800) {
   marginLeftCalculation = desktopMarginCalulation;
 } else {
   marginLeftCalculation = navContainerWidth;
 }
-
-var currentStep = 0;
-
-var navWidth = $("#step-nav").width() + 32;
-console.log(slideHeight);
 
 $("div.slider ul li, div.slider").css({ width: navWidth });
 $("div.slider").css({ width: navWidth });
