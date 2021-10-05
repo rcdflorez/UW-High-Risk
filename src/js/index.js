@@ -18,3 +18,31 @@ $("a.uploadLink").click(function (e) {
     .hide()
     .fadeIn();
 });
+
+const InitExample = {
+  comment: "this is a mock reflecting the final form of this API",
+  loan_id: loanId,
+  verifications: [
+    {
+      verification_type: "Photo ID",
+      verification_provider: "Berbix",
+      requirement_level: "Manditory",
+      status: "NotStarted",
+      verdict: "Undecided",
+    },
+    {
+      verification_type: "Bank Account",
+      verification_provider: "Lendmate",
+      requirement_level: "Optional",
+      status: "InProgress",
+      verdict: "Undecided",
+    },
+    {
+      verification_type: "Debit Card",
+      verification_provider: "Stripe",
+      requirement_level: "Optional",
+      status: "InProgress",
+      verdict: "Undecided",
+    },
+  ],
+};
