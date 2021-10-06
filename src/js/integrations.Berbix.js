@@ -10,30 +10,32 @@ var handler = BerbixVerify.configure({
   },
 });
 
-$.ajax(`${verificationDomain}/api/uw_flow/berbix/createClientToken`, {
-  method: "POST",
-  crossDomain: true,
-  beforeSend: function () {
-    //
-  },
-  success: function () {},
-  data: {
-    hosted,
-    test_name: testName,
-    loan_id: loanId,
-  },
-})
-  .done((data) => {
-    clientToken = data.client_token;
-
-    handler.open({
-      clientToken: clientToken,
-      modal: false,
-      root: "berbixArea",
-    });
+const initBerbix = () => {
+  $.ajax(`${verificationDomain}/api/uw_flow/berbix/createClientToken`, {
+    method: "POST",
+    crossDomain: true,
+    beforeSend: function () {
+      //
+    },
+    success: function () {},
+    data: {
+      hosted,
+      test_name: testName,
+      loan_id: loanId,
+    },
   })
-  .then(() => {
-    $("div.BerBix-place-holder").fadeOut("slow", function () {
-      $(this).html("");
+    .done((data) => {
+      clientToken = data.client_token;
+
+      handler.open({
+        clientToken: clientToken,
+        modal: false,
+        root: "berbixArea",
+      });
+    })
+    .then(() => {
+      $("div.BerBix-place-holder").fadeOut("slow", function () {
+        $(this).html("");
+      });
     });
-  });
+};

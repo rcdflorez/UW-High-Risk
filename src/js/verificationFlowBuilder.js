@@ -1,12 +1,30 @@
 const navContainer = $("#stepsContainer");
-let stepName = "test 1";
-let stepIndex = "1";
+const slidesContainer = $("div#slider ul");
+
+let stepIndex = 1;
 
 const createNavigationBar = () => {
   navContainer.empty();
-  navContainer.append(
-    `<a class="active-nav" href=""><span>${stepIndex}</span><p>${stepName}</p></a><small></small>`
-  );
+  InitExample.verifications.forEach((stepName) => {
+    if (stepName) {
+      stepIndex < InitExample.verifications.length
+        ? navContainer.append(
+            `<a class="" href=""><span>${stepIndex}</span><p>${stepName.display_title}</p></a><small></small>`
+          )
+        : navContainer.append(
+            `<a class="" href=""><span>${stepIndex}</span><p>${stepName.display_title}</p></a>`
+          );
+    }
+    stepIndex++;
+  });
 };
 
-//createNavigationBar();
+const createSlides = () => {
+  slidesContainer.empty();
+
+  InitExample.verifications.forEach((stepName) => {
+    slidesContainer.append(
+      `<li>${htmlTemplates[stepName.verification_provider]}</li>`
+    );
+  });
+};

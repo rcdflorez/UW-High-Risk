@@ -29,6 +29,7 @@ const InitExample = {
       requirement_level: "Manditory",
       status: "NotStarted",
       verdict: "Undecided",
+      display_title: "ID Verification",
     },
     {
       verification_type: "Bank Account",
@@ -36,6 +37,7 @@ const InitExample = {
       requirement_level: "Optional",
       status: "InProgress",
       verdict: "Undecided",
+      display_title: "Bank Verification",
     },
     {
       verification_type: "Debit Card",
@@ -43,6 +45,14 @@ const InitExample = {
       requirement_level: "Optional",
       status: "InProgress",
       verdict: "Undecided",
+      display_title: "Debit Card Verification",
     },
   ],
 };
+
+$(function () {
+  createNavigationBar();
+  createSlides();
+  initSlider();
+  initBerbix();
+});
